@@ -5,4 +5,4 @@ function add() {
   });
 }
 
-add();
+add(); 
