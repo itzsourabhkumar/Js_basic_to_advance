@@ -28,6 +28,7 @@ app.use(logger1, logger2);
 // });
 
 // app.use(express.static(__dirname+'/views'));
+app.use(express.static("public" ));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
@@ -48,16 +49,16 @@ app.get("/request-type", (req, res) => {
 });
 
 app.get("/serving", (req, res) => {
-  res.render("index");
+  res.render("index", { message: "ok" });
 });
 
 app.get("/blog/:blogid", logger1, (req, res) => {
   console.log("params: ", req.params);
   console.log("query params: ", req.query);
   console.log("body params ", req.body);
-  console.log("URL ",req.url);
-  console.log("Protocol ",req.protocol);
-  console.log("path ",req.path);
+  console.log("URL ", req.url);
+  console.log("Protocol ", req.protocol);
+  console.log("path ", req.path);
   res.send("blogs");
 });
 
