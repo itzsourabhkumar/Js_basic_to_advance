@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -17,7 +18,9 @@ const logger2 = (req, res, next) => {
   next();
 };
 
-app.use(logger1,logger2);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(logger1, logger2);
 
 // app.use("/request-type", (req, res, next) => {
 //   console.log("request type is ", req.method);
@@ -48,8 +51,13 @@ app.get("/serving", (req, res) => {
   res.render("index");
 });
 
-app.get("/blog/:blogid", logger1 ,(req, res) => {
+app.get("/blog/:blogid", logger1, (req, res) => {
   console.log("params: ", req.params);
+  console.log("query params: ", req.query);
+  console.log("body params ", req.body);
+  console.log("URL ",req.url);
+  console.log("Protocol ",req.protocol);
+  console.log("path ",req.path);
   res.send("blogs");
 });
 
